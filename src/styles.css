@@ -51,7 +51,7 @@ input:hover {
 }
 
 .gallery {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: space-around;
 }

@@ -37,6 +37,7 @@ function searchPhoto(evt) {
   resetToDisplayNextPic(evt);
   setSearchValue();
   generateURL();
+  refs.galleryList.style.display = 'flex';
   if (API.pageNumber !== 1) {
     refs.morePicBtn.style.display = 'block';
   }
