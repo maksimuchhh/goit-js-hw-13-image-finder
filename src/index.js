@@ -6,6 +6,7 @@ import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 const refs = {
   galleryList: document.querySelector('.gallery'),
+
   submitBtn: document.querySelector('.submit-btn'),
   searchQuery: document.querySelector('input[name="query"]'),
   morePicBtn: document.querySelector('.more-pictures'),
@@ -17,17 +18,19 @@ refs.galleryList.addEventListener('click', openModal);
 
 async function renderPhoto() {
   const resolve = await API.fetchPhoto(URL);
-  console.log(resolve.hits);
   const markup = await photoTemplate(resolve.hits);
   refs.galleryList.insertAdjacentHTML('beforeend', markup);
 }
 
 function openModal(evt) {
-  const source = evt.target.getAttribute('data-source');
-  let instance = basicLightbox.create(
-    `<img src="${source}" width="800" height="600">`,
-  );
-  instance.show();
+  const imgEl = document.querySelectorAll('.photo-card img');
+  if (Array.from(imgEl).includes(evt.target)) {
+    const source = evt.target.getAttribute('data-source');
+    let instance = basicLightbox.create(
+      `<img src="${source}" width="800" height="600">`,
+    );
+    instance.show();
+  }
 }
 
 function searchPhoto(evt) {
@@ -67,6 +70,6 @@ function morePictures() {
         top: scrollCords,
         behavior: 'smooth',
       }),
-    400,
+    700,
   );
 }
